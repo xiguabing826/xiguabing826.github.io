@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萌次元 - 二次元爱好者的专属购物平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF69B4',
+                        secondary: '#8A2BE2',
+                        accent: '#FFD700',
+                        dark: '#2C2F33',
+                        light: '#F8F9FA',
+                        'anime-blue': '#4169E1',
+                        'anime-pink': '#FFB6C1',
+                        'anime-purple': '#9370DB',
+                        'anime-yellow': '#FFFFE0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            }
+            .gradient-mask-b {
+                mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            }
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="glass-effect border-b border-gray-200/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <a href="#" class="flex items-center">
+                            <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+                            <i class="fa fa-heart text-accent animate-pulse-slow"></i>
+                        </a>
+                    </div>
+					
+                    
+                    <!-- 导航链接 - 桌面版 -->
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#home" class="text-gray-800 hover:text-primary font-medium transition-colors">首页</a>
+                        <a href="#products" class="text-gray-800 hover:text-primary font-medium transition-colors">商品分类</a>
+                        <a href="#events" class="text-gray-800 hover:text-primary font-medium transition-colors">活动中心</a>
+                        <a href="#community" class="text-gray-800 hover:text-primary font-medium transition-colors">社区</a>
+                        <a href="#about" class="text-gray-800 hover:text-primary font-medium transition-colors">关于我们</a>
+						<a href="login.html" class="text-gray-800 hover:text-primary font-medium transition-colors hidden" id="loginLink">登录</a>
+                    </nav>
+                    <!-- 功能按钮 + 用户状态 -->
+                              <div class="flex items-center space-x-4">
+                                <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+                                <a href="#cart" class="relative text-gray-600 hover:text-primary">
+                                  <i class="fa fa-shopping-cart text-lg"></i>
+                                  <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                                </a>
+                    
+                                <!-- 用户已登录：显示头像+下拉菜单 -->
+                                <div id="userLoggedIn" class="hidden relative group">
+                                  <button class="flex items-center">
+                                    <img id="userAvatar" src="" alt="用户头像" class="w-8 h-8 rounded-full object-cover border-2 border-primary">
+                                    <i class="fa fa-angle-down ml-1 text-gray-600"></i>
+                                  </button>
+                                  <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 hidden group-hover:block transition-all">
+                                    <a href="#profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                      <i class="fa fa-user mr-2"></i> 个人中心
+                                    </a>
+                                    <a href="#favorites" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                      <i class="fa fa-heart mr-2"></i> 我的收藏
+                                    </a>
+                                    <a href="#history" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                      <i class="fa fa-history mr-2"></i> 浏览历史
+                                    </a>
+                                    <a href="#settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                      <i class="fa fa-cog mr-2"></i> 设置
+                                    </a>
+                                    <div class="border-t border-gray-100 my-1"></div>
+                                    <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                      <i class="fa fa-sign-out mr-2"></i> 退出登录
+                                    </a>
+                                  </div>
+                                </div>
+                    
+                                <!-- 用户未登录：隐藏头像，显示登录入口（备用，可根据需求调整） -->
+                                <div id="userLoggedOut" class="hidden">
+                                  <a href="login.html" class="text-gray-600 hover:text-primary font-medium">登录</a>
+                                </div>
+                    
+                                <!-- 移动端菜单按钮 -->
+                                <button class="md:hidden text-gray-600 hover:text-primary" id="mobileMenuBtn">
+                                  <i class="fa fa-bars text-lg"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                   
+        
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">首页</a>
+                <a href="#products" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">商品分类</a>
+                <a href="#events" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">活动中心</a>
+                <a href="#community" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">社区</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">关于我们</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="pt-16 pb-20">
+        <!-- 英雄区域 -->
+        <section id="home" class="relative h-[80vh] min-h-[600px] overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="背景1.jpg" alt="二次元背景" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/40 to-secondary/40"></div>
+            </div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center relative z-10">
+                <div class="max-w-2xl">
+                    <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white leading-tight text-shadow mb-4">
+                        发现属于你的<br>二次元世界
+                    </h1>
+                    <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 max-w-xl">
+                        汇聚全球热门动漫周边、手办、同人志，打造专属于二次元爱好者的购物天堂。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#products" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                            立即探索
+                        </a>
+                        <a href="#events" class="px-8 py-3 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 backdrop-blur-sm">
+                            查看活动
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 装饰元素 -->
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-50 to-transparent"></div>
+            <div class="absolute -bottom-6 right-0 w-64 h-64 md:w-96 md:h-96 opacity-30">
+                <div class="w-full h-full bg-primary rounded-full filter blur-3xl"></div>
+            </div>
+            <div class="absolute top-1/4 left-10 w-32 h-32 bg-secondary rounded-full opacity-20 filter blur-2xl"></div>
+        </section>
+
+        <!-- 特色区域 -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                        <div class="w-16 h-16 bg-anime-pink/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-gift text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">正版授权周边</h3>
+                        <p class="text-gray-600">与全球知名IP合作，提供100%正版保证的二次元周边产品，让你拥有高品质收藏。</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                        <div class="w-16 h-16 bg-anime-blue/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-rocket text-2xl text-anime-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">极速发货</h3>
+                        <p class="text-gray-600">全国多仓发货，闪电配送，让你第一时间拿到心仪的二次元好物。</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                        <div class="w-16 h-16 bg-anime-purple/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-comments text-2xl text-anime-purple"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">专属社区</h3>
+                        <p class="text-gray-600">加入我们的二次元社区，分享你的收藏，结识同好，参与专属活动。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 商品分类 -->
+        <section id="products" class="py-16 bg-white">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">热门商品分类</h2>
+                            <p class="text-gray-600 max-w-2xl mx-auto">探索我们丰富的二次元商品分类，找到属于你的那一份热爱</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <a href="category/figurines.html" class="category-card relative rounded-xl overflow-hidden h-48 md:h-64 shadow-md group">
+                                <img src="details/手办模型.jpg" alt="手办模型" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 p-4 w-full">
+                                    <h3 class="text-white font-bold text-lg mb-1">手办模型</h3>
+                                    <p class="text-white/80 text-sm">128 款商品</p>
+                                </div>
+                            </a>
+                            <a href="category/comics.html" class="category-card relative rounded-xl overflow-hidden h-48 md:h-64 shadow-md group">
+                                <img src="同人漫画.jpg" alt="同人漫画" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 p-4 w-full">
+                                    <h3 class="text-white font-bold text-lg mb-1">同人志漫画</h3>
+                                    <p class="text-white/80 text-sm">96 款商品</p>
+                                </div>
+                            </a>
+                            <a href="category/cosplay服装.html" class="category-card relative rounded-xl overflow-hidden h-48 md:h-64 shadow-md group">
+                                <img src="cosplay服装.jpg" alt="Cosplay服饰" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 p-4 w-full">
+                                    <h3 class="text-white font-bold text-lg mb-1">Cosplay服饰</h3>
+                                    <p class="text-white/80 text-sm">72 款商品</p>
+                                </div>
+                            </a>
+                            <a href="category/周边.html" class="category-card relative rounded-xl overflow-hidden h-48 md:h-64 shadow-md group">
+                                <img src="周边.jpg" alt="周边饰品" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 p-4 w-full">
+                                    <h3 class="text-white font-bold text-lg mb-1">周边饰品</h3>
+                                    <p class="text-white/80 text-sm">144 款商品</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+        <!-- 新品上市 -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center mb-12">
+                    <div>
+                        <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">新品上市</h2>
+                        <p class="text-gray-600">最新上架的热门二次元商品，先到先得</p>
+                    </div>
+                    <a href="#" class="text-primary font-medium hover:underline flex items-center">
+                        查看全部 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- 商品卡片 1 -->
+					<a href="details/星之卡比.html">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative">
+                            <img src="details/星之卡比1.jpg" alt="限定版动漫角色手办" class="w-full h-64 object-cover">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+                            </div>
+                            <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <i class="fa fa-heart-o"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="text-yellow-400 flex">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <span class="text-gray-500 text-sm ml-2">(128)</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">限定版动漫角色手办 1/6比例 精美涂装</h3>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-primary font-bold text-lg">¥399.00</span>
+                                    <span class="text-gray-400 line-through text-sm ml-2">¥499.00</span>
+                                </div>
+                                <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 商品卡片 2 -->
+					<a href="details/动漫主题卫衣.html">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative">
+                            <img src="服装.jpg" alt="动漫主题卫衣" class="w-full h-64 object-cover">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+                            </div>
+                            <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <i class="fa fa-heart-o"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="text-yellow-400 flex">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                                <span class="text-gray-500 text-sm ml-2">(86)</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">2025春季新款 动漫主题卫衣 宽松版型</h3>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-primary font-bold text-lg">¥159.00</span>
+                                    <span class="text-gray-400 line-through text-sm ml-2">¥199.00</span>
+                                </div>
+                                <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 商品卡片 3 -->
+					<a href="details/手机壳.html">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative">
+                            <img src="手机壳.jpg" alt="动漫角色手机壳" class="w-full h-64 object-cover">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+                            </div>
+                            <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <i class="fa fa-heart-o"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="text-yellow-400 flex">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <span class="text-gray-500 text-sm ml-2">(214)</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">全包防摔 动漫角色定制手机壳 多款可选</h3>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-primary font-bold text-lg">¥49.00</span>
+                                    <span class="text-gray-400 line-through text-sm ml-2">¥69.00</span>
+                                </div>
+                                <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- 商品卡片 4 -->
+					<a href="details/海报.html">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative">
+                            <img src="海报.jpg" alt="限量版漫画礼盒" class="w-full h-64 object-cover">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+                            </div>
+                            <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                <i class="fa fa-heart-o"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="text-yellow-400 flex">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <span class="text-gray-500 text-sm ml-2">(56)</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">限量版漫画礼盒 含独家海报+角色卡</h3>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-primary font-bold text-lg">¥259.00</span>
+                                    <span class="text-gray-400 line-through text-sm ml-2">¥299.00</span>
+                                </div>
+                                <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+					</a>
+					
+                </div>
+            </div>
+        </section>
+
+        <!-- 促销活动 -->
+         <section id="home" class="relative h-[50vh] min-h-[500px] overflow-hidden">
+                    <div class="absolute inset-0 z-0">
+                        <img src="背景2.jpg" alt="二次元背景" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/40 to-secondary/40"></div>
+                    </div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold mb-4">限时促销活动</h2>
+                    <p class="text-white/80 max-w-2xl mx-auto">把握限时优惠，获取更多二次元好物</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-transform">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="md:w-1/3">
+                                <img src="夏季大促.jpg" alt="夏季大促" class="w-full h-40 object-cover rounded-lg">
+                            </div>
+                            <div class="md:w-2/3">
+                                <h3 class="text-xl font-bold mb-2">夏季大促销</h3>
+                                <p class="text-white/80 mb-4">全场商品8折起，更有满减优惠等你来享！</p>
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="days">03</span>
+                                        <span class="text-xs">天</span>
+                                    </div>
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="hours">12</span>
+                                        <span class="text-xs">时</span>
+                                    </div>
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="minutes">45</span>
+                                        <span class="text-xs">分</span>
+                                    </div>
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="seconds">33</span>
+                                        <span class="text-xs">秒</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-block bg-white text-anime-purple px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                                    立即参与
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-transform">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="md:w-1/3">
+                                <img src="会员日活动.jpg" alt="会员日特惠" class="w-full h-40 object-cover rounded-lg">
+                            </div>
+                            <div class="md:w-2/3">
+                                <h3 class="text-xl font-bold mb-2">会员日特惠</h3>
+                                <p class="text-white/80 mb-4">会员专享额外9折，积分翻倍，限定周边抢先购！</p>
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="days2">07</span>
+                                        <span class="text-xs">天</span>
+                                    </div>
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="hours2">05</span>
+                                        <span class="text-xs">时</span>
+                                    </div>
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="minutes2">22</span>
+                                        <span class="text-xs">分</span>
+                                    </div>
+                                    <div class="bg-white/20 rounded-md w-12 h-12 flex flex-col items-center justify-center">
+                                        <span class="text-lg font-bold" id="seconds2">18</span>
+                                        <span class="text-xs">秒</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="inline-block bg-white text-anime-blue px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                                    了解详情
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区展示 -->
+        <section id="community" class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">二次元社区</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">加入我们的社区，分享你的二次元收藏和创作</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md">
+                        <div class="relative h-48">
+                            <img src="https://picsum.photos/id/1059/400/300" alt="同人绘画作品" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                                <div class="flex items-center">
+                                    <img src="https://picsum.photos/id/1027/100/100" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                                    <div class="ml-3">
+                                        <h4 class="text-white font-medium">动漫爱好者</h4>
+                                        <p class="text-white/70 text-sm">2小时前</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">分享我的原创动漫角色设计</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-2">这是我花了一个月时间设计的原创动漫角色，希望大家喜欢！</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center text-gray-500 hover:text-primary">
+                                        <i class="fa fa-heart-o mr-1"></i> 128
+                                    </button>
+                                    <button class="flex items-center text-gray-500 hover:text-primary">
+                                        <i class="fa fa-comment-o mr-1"></i> 24
+                                    </button>
+                                </div>
+                                <button class="text-primary hover:underline">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md">
+                        <div class="relative h-48">
+                            <img src="https://picsum.photos/id/1061/400/300" alt="手办展示" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                                <div class="flex items-center">
+                                    <img src="https://picsum.photos/id/1025/100/100" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                                    <div class="ml-3">
+                                        <h4 class="text-white font-medium">手办收藏家</h4>
+                                        <p class="text-white/70 text-sm">昨天</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">我的限量版手办收藏展示</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-2">终于集齐了这个系列的所有限量版手办，太开心了！</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center text-gray-500 hover:text-primary">
+                                        <i class="fa fa-heart-o mr-1"></i> 342
+                                    </button>
+                                    <button class="flex items-center text-gray-500 hover:text-primary">
+                                        <i class="fa fa-comment-o mr-1"></i> 56
+                                    </button>
+                                </div>
+                                <button class="text-primary hover:underline">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md">
+                        <div class="relative h-48">
+                            <img src="https://picsum.photos/id/1060/400/300" alt="漫展活动" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                                <div class="flex items-center">
+                                    <img src="https://picsum.photos/id/1028/100/100" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                                    <div class="ml-3">
+                                        <h4 class="text-white font-medium">漫展达人</h4>
+                                        <p class="text-white/70 text-sm">3天前</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">2025夏季漫展精彩回顾</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-2">分享今年夏季漫展的精彩瞬间，现场见到了好多喜欢的声优！</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center text-gray-500 hover:text-primary">
+                                        <i class="fa fa-heart-o mr-1"></i> 256
+                                    </button>
+                                    <button class="flex items-center text-gray-500 hover:text-primary">
+                                        <i class="fa fa-comment-o mr-1"></i> 42
+                                    </button>
+                                </div>
+                                <button class="text-primary hover:underline">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 加入社区按钮 -->
+                <button id="joinCommunityBtn" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center">
+                  <i class="fa fa-users mr-2"></i> 加入社区
+                </button>
+                
+                <!-- 成功提示 (默认隐藏) -->
+                <div id="communitySuccess" class="hidden fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg bg-green-500 text-white transform transition-all duration-500 translate-x-full">
+                  <div class="flex items-center">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <span>加入社区成功！欢迎您的加入~</span>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 订阅区域 -->
+        <!-- 订阅表单 -->
+        <div class="bg-gray-100 rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-2">订阅萌次元资讯</h3>
+          <p class="text-gray-600 mb-4">获取最新活动、限量商品和独家优惠</p>
+          
+          <form id="subscribeForm" class="flex flex-col sm:flex-row gap-2">
+            <input type="email" id="subscribeEmail" name="email" placeholder="请输入您的邮箱" 
+                   class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+            <button type="submit" class="bg-secondary hover:bg-secondary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+              <i class="fa fa-paper-plane mr-2"></i> 订阅
+            </button>
+          </form>
+          
+          <!-- 成功提示 (默认隐藏) -->
+          <div id="subscribeSuccess" class="hidden mt-3 p-3 bg-green-100 text-green-800 rounded-lg border border-green-300">
+            <i class="fa fa-check-circle mr-1"></i> 订阅成功！我们会定期发送最新资讯到您的邮箱。
+          </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">萌次元</h3>
+                    <p class="text-gray-400 mb-6">二次元爱好者的专属购物平台，汇聚全球热门动漫周边。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-wechat text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">购物指南</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">注册与登录</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">购物流程</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">支付方式</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">配送说明</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">会员福利</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">客户服务</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">常见问题</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">退换货政策</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">联系客服</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">意见反馈</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">隐私政策</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker text-gray-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">上海市浦东新区张江高科技园区动漫大道88号</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">400-123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">service@moe次元.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-clock-o text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">周一至周日 9:00-21:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 萌次元. 保留所有权利.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">隐私政策</a>
+                        <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">服务条款</a>
+                        <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">网站地图</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
+
+    
+            <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                <div class="flex gap-4 pb-4 border-b border-gray-100">
+                    <img src="https://picsum.photos/id/1025/100/100" alt="限定版动漫角色手办" class="w-20 h-20 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-gray-800">限定版动漫角色手办</h4>
+                        <p class="text-sm text-gray-500">1/6比例 精美涂装</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center border rounded-lg">
+                                <button class="px-3 py-1 text-gray-500 hover:text-gray-800">-</button>
+                                <span class="px-2">1</span>
+                                <button class="px-3 py-1 text-gray-500 hover:text-gray-800">+</button>
+                            </div>
+                            <span class="font-medium text-gray-800">¥399.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 pb-4 border-b border-gray-100">
+                    <img src="https://picsum.photos/id/1028/100/100" alt="动漫主题卫衣" class="w-20 h-20 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-gray-800">动漫主题卫衣</h4>
+                        <p class="text-sm text-gray-500">宽松版型 M码</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center border rounded-lg">
+                                <button class="px-3 py-1 text-gray-500 hover:text-gray-800">-</button>
+                                <span class="px-2">2</span>
+                                <button class="px-3 py-1 text-gray-500 hover:text-gray-800">+</button>
+                            </div>
+                            <span class="font-medium text-gray-800">¥159.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 pb-4">
+                    <img src="https://picsum.photos/id/1015/100/100" alt="动漫角色手机壳" class="w-20 h-20 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-gray-800">动漫角色手机壳</h4>
+                        <p class="text-sm text-gray-500">全包防摔 iPhone 14</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center border rounded-lg">
+                                <button class="px-3 py-1 text-gray-500 hover:text-gray-800">-</button>
+                                <span class="px-2">1</span>
+                                <button class="px-3 py-1 text-gray-500 hover:text-gray-800">+</button>
+                            </div>
+                            <span class="font-medium text-gray-800">¥49.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6 border-t border-gray-200">
+                <div class="flex justify-between mb-4">
+                    <span class="text-gray-600">小计</span>
+                    <span class="font-bold">¥766.00</span>
+                </div>
+                <div class="flex justify-between mb-6">
+                    <span class="text-gray-600">运费</span>
+                    <span class="font-bold">¥15.00</span>
+                </div>
+                <div class="flex justify-between mb-6">
+                    <span class="text-gray-600">总计</span>
+                    <span class="text-xl font-bold text-primary">¥781.00</span>
+                </div>
+                <button class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors">
+                    结算
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div id="overlay" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 hidden"></div>
+<!-- 登录状态处理脚本 -->
+  <script>
+    // 检查用户登录状态
+    document.addEventListener('DOMContentLoaded', function() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const userLoggedIn = document.getElementById('userLoggedIn');
+      const userLoggedOut = document.getElementById('userLoggedOut');
+      const userAvatar = document.getElementById('userAvatar');
+      const loginLink = document.getElementById('loginLink');
+
+      if (user && user.avatar) {
+        // 已登录：显示头像菜单，隐藏登录入口
+        userLoggedIn.classList.remove('hidden');
+        userLoggedOut.classList.add('hidden');
+        loginLink.classList.add('hidden');
+        userAvatar.src = user.avatar;
+      } else {
+        // 未登录：隐藏头像菜单，显示登录入口
+        userLoggedIn.classList.add('hidden');
+        userLoggedOut.classList.remove('hidden');
+        loginLink.classList.remove('hidden');
+      }
+
+      // 退出登录功能
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('user');
+        window.location.href = window.location.href; // 刷新页面
+      });
+
+      // 移动端菜单切换（可扩展功能）
+      document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+      });
+    });
+  </script>
+    <script>
+       
+       
+        // 倒计时功能
+        function updateCountdown() {
+            // 这里只是模拟，实际应用中应该使用真实的截止日期
+            const days = document.getElementById('days');
+            const hours = document.getElementById('hours');
+            const minutes = document.getElementById('minutes');
+            const seconds = document.getElementById('seconds');
+            
+            if (days && hours && minutes && seconds) {
+                let s = parseInt(seconds.innerText);
+                let m = parseInt(minutes.innerText);
+                let h = parseInt(hours.innerText);
+                let d = parseInt(days.innerText);
+                
+                s--;
+                
+                if (s < 0) {
+                    s = 59;
+                    m--;
+                    
+                    if (m < 0) {
+                        m = 59;
+                        h--;
+                        
+                        if (h < 0) {
+                            h = 23;
+                            d--;
+                            
+                            if (d < 0) {
+                                d = 0;
+                                h = 0;
+                                m = 0;
+                                s = 0;
+                            }
+                        }
+                    }
+                }
+                
+                seconds.innerText = s.toString().padStart(2, '0');
+                minutes.innerText = m.toString().padStart(2, '0');
+                hours.innerText = h.toString().padStart(2, '0');
+                days.innerText = d.toString().padStart(2, '0');
+            }
+            
+            // 第二个倒计时
+            const days2 = document.getElementById('days2');
+            const hours2 = document.getElementById('hours2');
+            const minutes2 = document.getElementById('minutes2');
+            const seconds2 = document.getElementById('seconds2');
+            
+            if (days2 && hours2 && minutes2 && seconds2) {
+                let s = parseInt(seconds2.innerText);
+                let m = parseInt(minutes2.innerText);
+                let h = parseInt(hours2.innerText);
+                let d = parseInt(days2.innerText);
+                
+                s--;
+                
+                if (s < 0) {
+                    s = 59;
+                    m--;
+                    
+                    if (m < 0) {
+                        m = 59;
+                        h--;
+                        
+                        if (h < 0) {
+                            h = 23;
+                            d--;
+                            
+                            if (d < 0) {
+                                d = 0;
+                                h = 0;
+                                m = 0;
+                                s = 0;
+                            }
+                        }
+                    }
+                }
+                
+                seconds2.innerText = s.toString().padStart(2, '0');
+                minutes2.innerText = m.toString().padStart(2, '0');
+                hours2.innerText = h.toString().padStart(2, '0');
+                days2.innerText = d.toString().padStart(2, '0');
+            }
+        }
+        
+        // 每秒更新一次倒计时
+        setInterval(updateCountdown, 1000);
+		document.addEventListener('DOMContentLoaded', function() {
+		  // 加入社区按钮点击事件
+		  const joinCommunityBtn = document.getElementById('joinCommunityBtn');
+		  const communitySuccess = document.getElementById('communitySuccess');
+		  
+		  if (joinCommunityBtn && communitySuccess) {
+		    joinCommunityBtn.addEventListener('click', function() {
+		      // 显示成功提示
+		      communitySuccess.classList.remove('hidden');
+		      setTimeout(() => {
+		        communitySuccess.classList.remove('translate-x-full');
+		      }, 10);
+		      
+		      // 3秒后隐藏提示
+		      setTimeout(() => {
+		        communitySuccess.classList.add('translate-x-full');
+		        setTimeout(() => {
+		          communitySuccess.classList.add('hidden');
+		        }, 500);
+		      }, 3000);
+		    });
+		  }
+		
+		  // 邮箱订阅表单提交
+		  const subscribeForm = document.getElementById('subscribeForm');
+		  const subscribeEmail = document.getElementById('subscribeEmail');
+		  const subscribeSuccess = document.getElementById('subscribeSuccess');
+		  
+		  if (subscribeForm && subscribeEmail && subscribeSuccess) {
+		    subscribeForm.addEventListener('submit', function(e) {
+		      e.preventDefault();
+		      
+		      // 简单验证邮箱格式
+		      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		      if (!emailRegex.test(subscribeEmail.value)) {
+		        alert('请输入有效的邮箱地址');
+		        return;
+		      }
+		      
+		      // 显示成功提示
+		      subscribeSuccess.classList.remove('hidden');
+		      
+		      // 3秒后隐藏提示（可选）
+		      setTimeout(() => {
+		        subscribeSuccess.classList.add('hidden');
+		      }, 5000);
+		      
+		      // 清空输入框
+		      subscribeEmail.value = '';
+		    });
+		  }
+		});
+		
+    </script>
+</body>
+</html>    

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萌次元 - 火影忍者 鸣人九尾模式手办</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF69B4',
+                        secondary: '#8A2BE2',
+                        accent: '#FFD700',
+                        dark: '#2C2F33',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+            }
+            .product-zoom {
+                transition: transform 0.3s ease;
+            }
+            .product-zoom:hover {
+                transform: scale(1.05);
+            }
+            .active-size {
+                background-color: theme('colors.primary');
+                color: white;
+                border-color: theme('colors.primary');
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="glass-effect border-b border-gray-200/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="../萌次元.html" class="flex items-center">
+                            <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+                            <i class="fa fa-heart text-accent animate-pulse-slow"></i>
+                        </a>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="../萌次元.html" class="text-gray-800 hover:text-primary font-medium">首页</a>
+                        <a href="../category/figurines.html" class="text-gray-800 hover:text-primary font-medium">手办模型</a>
+                        <a href="../category/comics.html" class="text-gray-800 hover:text-primary font-medium">同人漫画</a>
+                        <a href="../category/cosplay服装.html" class="text-gray-800 hover:text-primary font-medium">Cosplay服饰</a>
+                        <a href="../category/周边.html" class="text-gray-800 hover:text-primary font-medium">周边饰品</a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+                        <a href="../../cart.html" class="relative text-gray-600 hover:text-primary">
+                            <i class="fa fa-shopping-cart text-lg"></i>
+                            <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                        </a>
+                        <button class="text-gray-600 hover:text-primary"><i class="fa fa-user-circle text-lg"></i></button>
+                        <button class="md:hidden text-gray-600 hover:text-primary" id="mobileMenuBtn">
+                            <i class="fa fa-bars text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="../萌次元.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">首页</a>
+                <a href="../category/figurines.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">手办模型</a>
+                <a href../../category/comics.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">同人漫画</a>
+                <a href="../category/cosplay服装.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">Cosplay服饰</a>
+                <a href="../category/周边.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">周边饰品</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16 pb-20">
+        <!-- 面包屑导航 -->
+        <div class="bg-white border-b border-gray-200 py-4">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center text-sm text-gray-500">
+                    <a href="../萌次元.html" class="hover:text-primary">首页</a>
+                    <span class="mx-2">/</span>
+                    <a href="../category/figurines.html" class="hover:text-primary">手办模型</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-gray-700">火影忍者 鸣人九尾模式手办</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商品详情 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+                    <!-- 商品图片区域 -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                            <!-- 主图 -->
+                            <div class="relative">
+                                <img id="mainImage" src="鸣人1.jpg" alt="火影忍者 鸣人九尾模式手办" class="w-full h-[500px] object-cover product-zoom">
+                                <div class="absolute top-4 left-4">
+                                    <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+                                </div>
+                                <button class="absolute top-4 right-4 bg-white/80 hover:bg-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa fa-heart-o text-xl"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- 缩略图 -->
+                            <div class="grid grid-cols-4 gap-2 p-4">
+                                <button class="border-2 border-primary">
+                                    <img src="鸣人1.jpg" alt="正面" class="w-full h-20 object-cover">
+                                </button>
+                                <button>
+                                    <img src="鸣人2.jpg" alt="侧面" class="w-full h-20 object-cover">
+                                </button>
+                                <button>
+                                    <img src="鸣人3.jpg" alt="背面" class="w-full h-20 object-cover">
+                                </button>
+                                <button>
+                                    <img src="鸣人4.jpg" alt="细节" class="w-full h-20 object-cover">
+                                </button>
+                            </div>
+                        </div>
+                    
+                    <!-- 商品信息区域 -->
+                    <div class="lg:col-span-3">
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">火影忍者 鸣人九尾模式手办</h1>
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(128条评价)</span>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-primary font-bold text-3xl">¥399.00</span>
+                                <span class="text-gray-400 line-through text-sm ml-2">¥499.00</span>
+                                <span class="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded ml-4">限时折扣</span>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-medium text-gray-700 mb-2">规格选择</h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                    <button class="size-option border rounded-lg py-2 text-center active-size">1/6比例</button>
+                                    <button class="size-option border rounded-lg py-2 text-center">1/8比例</button>
+                                    <button class="size-option border rounded-lg py-2 text-center">Q版</button>
+                                    <button class="size-option border rounded-lg py-2 text-center">超大比例</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-medium text-gray-700 mb-2">颜色选择</h3>
+                                <div class="flex space-x-2">
+                                    <button class="w-8 h-8 rounded-full bg-orange-500 border-2 border-transparent focus:border-primary"></button>
+                                    <button class="w-8 h-8 rounded-full bg-gray-800 border-2 border-transparent focus:border-primary"></button>
+                                    <button class="w-8 h-8 rounded-full bg-blue-500 border-2 border-transparent focus:border-primary"></button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h3 class="font-medium text-gray-700 mb-2">购买数量</h3>
+                                <div class="flex items-center w-32">
+                                    <button class="w-10 h-10 border border-gray-300 rounded-l-lg flex items-center justify-center hover:bg-gray-100">-</button>
+                                    <input type="number" value="1" min="1" class="w-16 h-10 border-t border-b border-gray-300 text-center quantity-input">
+                                    <button class="w-10 h-10 border border-gray-300 rounded-r-lg flex items-center justify-center hover:bg-gray-100">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button class="flex-1 bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center">
+                                    <i class="fa fa-shopping-cart mr-2"></i> 加入购物车
+                                </button>
+                                <button class="w-16 bg-white border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium py-3 rounded-lg transition-colors flex items-center justify-center">
+                                    <i class="fa fa-heart-o"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">库存信息</h3>
+                                <p class="text-gray-600">库存: <span class="text-primary font-semibold">245件</span></p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">配送信息</h3>
+                                <p class="text-gray-600">预计发货时间: 付款后48小时内</p>
+                                <p class="text-gray-600">配送方式: 顺丰快递 (满199元免运费)</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">商品编号</h3>
+                                <p class="text-gray-600">PRODUCT-20250615</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 商品描述 -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="border-b border-gray-200">
+                        <div class="flex">
+                            <button class="px-6 py-4 font-medium text-primary border-b-2 border-primary">商品描述</button>
+                            <button class="px-6 py-4 font-medium text-gray-500 hover:text-gray-700">规格参数</button>
+                            <button class="px-6 py-4 font-medium text-gray-500 hover:text-gray-700">用户评价</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">商品详情</h2>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">这款火影忍者鸣人九尾模式手办采用1/6比例设计，高度还原动漫中鸣人开启九尾模式后的震撼造型，细节刻画精致，涂装细腻。</p>
+                            <p class="mb-4">手办包含多个可动关节，支持多种战斗姿势摆放，配备专属特效配件和地台，让你可以重现动漫中的经典战斗场景。</p>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2 mt-6">产品特点：</h3>
+                            <ul class="list-disc pl-5 mb-4">
+                                <li class="mb-2">1/6比例，高度约24厘米</li>
+                                <li class="mb-2">超过20处可动关节，灵活摆姿</li>
+                                <li class="mb-2">精致涂装，还原九尾查克拉特效</li>
+                                <li class="mb-2">包含3款替换手型和特效配件</li>
+                                <li class="mb-2">专属展示地台，提升陈列效果</li>
+                            </ul>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2 mt-6">注意事项：</h3>
+                            <p class="mb-4">请避免阳光直射和高温环境，定期用干布擦拭保持清洁。小零件较多，不适合3岁以下儿童玩耍。</p>
+                            <img src="鸣人2.jpg" alt="手办细节图" class="w-full h-auto rounded-lg my-6">
+                            <p class="mb-4">手办整体采用环保PVC和ABS材料，安全无毒，同时保证了产品的耐用性和质感。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 推荐商品 -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800">相关推荐</h2>
+                    <a href="../category/figurines.html" class="text-primary hover:text-primary/80 font-medium flex items-center">
+                        查看更多 <i class="fa fa-angle-right ml-1"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- 推荐商品1 -->
+                    <a href="../details/佐助.html" class="block group">
+                                                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                                                  <div class="relative">
+                                                    <img src="佐助1.jpg" alt="动漫角色手办" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                                                    <div class="absolute top-3 left-3">
+                                                      <span class="bg-anime-purple text-white text-xs font-bold px-2 py-1 rounded">预售</span>
+                                                    </div>
+                                                    <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                                      <i class="fa fa-heart-o"></i>
+                                                    </button>
+                                                  </div>
+                                                  <div class="p-4">
+                                                    <div class="flex items-center mb-2">
+                                                      <div class="text-yellow-400 flex">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                      </div>
+                                                      <span class="text-gray-500 text-sm ml-2">(214)</span>
+                                                    </div>
+                                                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2 group-hover:text-primary transition-colors">人气动漫角色手办 1/8比例 可动关节</h3>
+                                                    <div class="flex justify-between items-center">
+                                                      <div>
+                                                        <span class="text-primary font-bold text-lg">¥599.00</span>
+                                                        <span class="text-gray-400 line-through text-sm ml-2">¥699.00</span>
+                                                      </div>
+                                                      <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                      </button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </a>
+                                              <!-- 商品卡片 3（可点击） -->
+                                                                        <a href="../details/卡卡西.html" class="block group">
+                                                                          <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                                                                            <div class="relative">
+                                                                              <img src="卡卡西1.jpg" alt="动漫角色手办" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                                                                              <div class="absolute top-3 left-3">
+                                                                                <span class="bg-anime-purple text-white text-xs font-bold px-2 py-1 rounded">预售</span>
+                                                                              </div>
+                                                                              <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                                                                <i class="fa fa-heart-o"></i>
+                                                                              </button>
+                                                                            </div>
+                                                                            <div class="p-4">
+                                                                              <div class="flex items-center mb-2">
+                                                                                <div class="text-yellow-400 flex">
+                                                                                  <i class="fa fa-star"></i>
+                                                                                  <i class="fa fa-star"></i>
+                                                                                  <i class="fa fa-star"></i>
+                                                                                  <i class="fa fa-star"></i>
+                                                                                  <i class="fa fa-star"></i>
+                                                                                </div>
+                                                                                <span class="text-gray-500 text-sm ml-2">(214)</span>
+                                                                              </div>
+                                                                              <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2 group-hover:text-primary transition-colors">人气动漫角色手办 1/8比例 可动关节</h3>
+                                                                              <div class="flex justify-between items-center">
+                                                                                <div>
+                                                                                  <span class="text-primary font-bold text-lg">¥399.00</span>
+                                                                                  <span class="text-gray-400 line-through text-sm ml-2">¥499.00</span>
+                                                                                </div>
+                                                                                <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                                                                  <i class="fa fa-shopping-cart"></i>
+                                                                                </button>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                        </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+                        <i class="fa fa-heart text-accent"></i>
+                    </div>
+                    <p class="text-gray-400 mb-6">专注于二次元文化的购物平台，为你带来最纯正的动漫周边体验。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-wechat text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">快速链接</h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../萌次元.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="../../category/figurines.html" class="text-gray-400 hover:text-white transition-colors">手办模型</a></li>
+                        <li><a href="../../category/comics.html" class="text-gray-400 hover:text-white transition-colors">同人漫画</a></li>
+                        <li><a href="../../category/cosplay服装.html" class="text-gray-400 hover:text-white transition-colors">Cosplay服饰</a></li>
+                        <li><a href="../../category/周边.html" class="text-gray-400 hover:text-white transition-colors">周边饰品</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">帮助中心</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">购物指南</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">支付方式</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">配送说明</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">售后服务</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">常见问题</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">客户服务</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-primary mr-3"></i>
+                            <span class="text-gray-400">400-888-8888</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-primary mr-3"></i>
+                            <span class="text-gray-400">service@moe.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-clock-o text-primary mr-3"></i>
+                            <span class="text-gray-400">周一至周日 9:00-21:00</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker text-primary mr-3"></i>
+                            <span class="text-gray-400">上海市浦东新区张江高科技园区</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 萌次元. 保留所有权利.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">隐私政策</a>
+                        <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">服务条款</a>
+                        <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">网站地图</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white', 'shadow-md');
+                navbar.classList.remove('glass-effect');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-md');
+                navbar.classList.add('glass-effect');
+            }
+        });
+        
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // 图片切换功能
+        const thumbnails = document.querySelectorAll('.grid.cols-4 button');
+        const mainImage = document.getElementById('mainImage');
+        
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                // 移除所有缩略图的边框
+                thumbnails.forEach(btn => btn.classList.remove('border-2', 'border-primary'));
+                // 添加当前缩略图的边框
+                thumbnail.classList.add('border-2', 'border-primary');
+                // 切换主图
+                mainImage.src = thumbnail.querySelector('img').src.replace('/150/150', '/800/800');
+            });
+        });
+        
+        // 规格选择功能
+        const sizeOptions = document.querySelectorAll('.size-option');
+        sizeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                sizeOptions.forEach(opt => opt.classList.remove('active-size'));
+                option.classList.add('active-size');
+            });
+        });
+    </script>
+</body>
+</html></doubaocanvas-part></doubaocanvas>
+

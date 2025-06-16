@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>萌次元 - 动漫限定海报</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF7A93', // 海报粉
+            secondary: '#4E97FF', // 清新蓝
+            accent: '#FFC837', // 活力黄
+            dark: '#2C3539',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+          }
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+      }
+      .product-zoom {
+        transition: transform 0.3s ease;
+      }
+      .product-zoom:hover {
+        transform: scale(1.03); /* 海报适度缩放，避免过度 */
+      }
+      .active-size {
+        background-color: theme('colors.primary');
+        color: white;
+        border-color: theme('colors.primary');
+      }
+      .animate-bounce-slow {
+        animation: bounce 3s infinite;
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="glass-effect border-b border-gray-200/30">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="../萌次元.html" class="flex items-center">
+              <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+              <i class="fa fa-heart text-accent animate-pulse-slow"></i>
+            </a>
+          </div>
+          <nav class="hidden md:flex space-x-8">
+            <a href="../萌次元.html" class="text-gray-800 hover:text-primary font-medium">首页</a>
+            <a href="../category/figurines.html" class="text-gray-800 hover:text-primary font-medium">手办模型</a>
+            <a href="../category/comics.html" class="text-gray-800 hover:text-primary font-medium">同人漫画</a>
+            <a href="../category/cosplay服装.html" class="text-gray-800 hover:text-primary font-medium">Cosplay服饰</a>
+            <a href="../category/周边.html" class="text-gray-800 hover:text-primary font-medium">周边饰品</a>
+          </nav>
+          <div class="flex items-center space-x-4">
+            <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+            <a href="../cart.html" class="relative text-gray-600 hover:text-primary">
+              <i class="fa fa-shopping-cart text-lg"></i>
+              <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+            </a>
+            <button class="text-gray-600 hover:text-primary"><i class="fa fa-user-circle text-lg"></i></button>
+            <button class="md:hidden text-gray-600 hover:text-primary" id="mobileMenuBtn">
+              <i class="fa fa-bars text-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="../萌次元.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">首页</a>
+        <a href="../category/figurines.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">手办模型</a>
+        <a href="../category/comics.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">同人漫画</a>
+        <a href="../category/cosplay服装.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">Cosplay服饰</a>
+        <a href="../category/周边.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">周边饰品</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16 pb-20">
+    <!-- 面包屑导航 -->
+    <div class="bg-white border-b border-gray-200 py-4">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center text-sm text-gray-500">
+          <a href="../萌次元.html" class="hover:text-primary">首页</a>
+          <span class="mx-2">/</span>
+          <a href="../category/comics.html" class="hover:text-primary">同人漫画</a>
+          <span class="mx-2">/</span>
+          <span class="text-gray-700">动漫限定海报</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品详情 -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          <!-- 商品图片区域 -->
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+              <!-- 主图 -->
+              <div class="relative">
+                <img id="mainImage" src="海报.jpg" alt="动漫限定海报" class="w-full h-[500px] object-cover product-zoom">
+                <div class="absolute top-4 left-4">
+                  <span class="bg-secondary text-white text-xs font-bold px-2 py-1 rounded animate-bounce-slow">新品上市</span>
+                </div>
+                <button class="absolute top-4 right-4 bg-white/80 hover:bg-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fa fa-heart-o text-xl"></i>
+                </button>
+              </div>
+              
+              <!-- 缩略图（海报多版本/细节） -->
+              <div class="grid grid-cols-4 gap-2 p-4">
+                <button class="border-2 border-primary" onclick="changeMainImage('https://picsum.photos/id/1100/800/800', '海报全貌')">
+                  <img src="海报.jpg" alt="海报全貌" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1101/800/800', '角色特写')">
+                  <img src="海报.jpg" alt="角色特写" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1102/800/800', '印刷细节')">
+                  <img src="海报.jpg" alt="印刷细节" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1103/800/800', '装裱效果')">
+                  <img src="海报.jpg" alt="装裱效果" class="w-full h-20 object-cover">
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 商品信息区域 -->
+          <div class="lg:col-span-3">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">动漫限定海报</h1>
+            <div class="flex items-center mb-4">
+              <div class="text-yellow-400 flex">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+              </div>
+              <span class="text-gray-500 text-sm ml-2">(56条评价)</span>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-xl mb-6">
+              <div class="flex items-center mb-4">
+                <span class="text-primary font-bold text-3xl">¥259.00</span>
+                <span class="text-gray-400 line-through text-sm ml-2">¥299.00</span>
+                <span class="bg-secondary/10 text-secondary text-xs font-bold px-2 py-1 rounded ml-4">限量发售</span>
+              </div>
+              
+              <div class="mb-4">
+                <h3 class="font-medium text-gray-700 mb-2">尺寸选择</h3>
+                <div class="grid grid-cols-3 gap-2">
+                  <button class="size-option border rounded-lg py-2 text-center active-size">A3 (42×29.7cm)</button>
+                  <button class="size-option border rounded-lg py-2 text-center">A4 (29.7×21cm)</button>
+                  <button class="size-option border rounded-lg py-2 text-center">定制尺寸</button>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h3 class="font-medium text-gray-700 mb-2">材质选择</h3>
+                <div class="flex flex-wrap gap-2">
+                  <button class="w-20 h-8 rounded border border-gray-300 hover:border-primary active-size">艺术相纸</button>
+                  <button class="w-20 h-8 rounded border border-gray-300 hover:border-primary">油画布纹</button>
+                  <button class="w-20 h-8 rounded border border-gray-300 hover:border-primary">金属质感</button>
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <h3 class="font-medium text-gray-700 mb-2">购买数量</h3>
+                <div class="flex items-center w-32">
+                  <button class="w-10 h-10 border border-gray-300 rounded-l-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(-1)">-</button>
+                  <input type="number" id="quantity" value="1" min="1" class="w-16 h-10 border-t border-b border-gray-300 text-center quantity-input">
+                  <button class="w-10 h-10 border border-gray-300 rounded-r-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(1)">+</button>
+                </div>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button class="flex-1 bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center" onclick="addToCart()">
+                  <i class="fa fa-shopping-cart mr-2"></i> 加入购物车
+                </button>
+                <button class="w-16 bg-white border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium py-3 rounded-lg transition-colors flex items-center justify-center">
+                  <i class="fa fa-heart-o"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">库存信息</h3>
+                <p class="text-gray-600">库存: <span class="text-primary font-semibold">88件</span>（限量版，售完即止）</p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">配送信息</h3>
+                <p class="text-gray-600">预计发货时间: 付款后72小时内（装裱款需额外+3天）</p>
+                <p class="text-gray-600">配送方式: 顺丰/京东快递（满199元免运费，定制尺寸运费另算）</p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">商品编号</h3>
+                <p class="text-gray-600">COMIC-POSTER-009</p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">海报特色</h3>
+                <p class="text-gray-600">• 正版授权原画复刻，色彩还原度≥98%</p>
+                <p class="text-gray-600">• 防水涂层工艺，可长期保存不褪色</p>
+                <p class="text-gray-600">• 支持装裱服务（需联系客服补差价）</p>
+                <p class="text-gray-600">• 边缘圆角处理，避免划伤</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 商品描述 -->
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="border-b border-gray-200">
+            <div class="flex flex-wrap">
+              <button class="description-tab active-tab px-6 py-4 font-medium text-primary border-b-2 border-primary">商品详情</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">尺寸参数</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">用户评价</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">常见问题</button>
+            </div>
+          </div>
+          
+          <div class="tab-content p-6">
+            <div class="active-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">商品详情</h3>
+              <div class="space-y-4">
+                <p class="text-gray-600">本次推出的动漫限定海报，由官方原画团队监修，完美复刻角色神韵与画面细节，是粉丝收藏、墙面装饰的绝佳

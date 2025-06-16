@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萌次元 - 动漫主题卫衣</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4A6CF7', // 动漫蓝
+                        secondary: '#FF6B8B', // 活力粉
+                        accent: '#FFD700', // 点缀金
+                        dark: '#2C3539',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+            }
+            .product-zoom {
+                transition: transform 0.3s ease;
+            }
+            .product-zoom:hover {
+                transform: scale(1.05);
+            }
+            .active-size {
+                background-color: theme('colors.primary');
+                color: white;
+                border-color: theme('colors.primary');
+            }
+            .animate-bounce-slow {
+                animation: bounce 3s infinite;
+            }
+            @keyframes bounce {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="glass-effect border-b border-gray-200/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="../萌次元.html" class="flex items-center">
+                            <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+                            <i class="fa fa-heart text-secondary animate-pulse-slow"></i>
+                        </a>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="../萌次元.html" class="text-gray-800 hover:text-primary font-medium">首页</a>
+                        <a href="../category/figurines.html" class="text-gray-800 hover:text-primary font-medium">手办模型</a>
+                        <a href="../category/comics.html" class="text-gray-800 hover:text-primary font-medium">同人漫画</a>
+                        <a href="../category/cosplay服装.html" class="text-gray-800 hover:text-primary font-medium">Cosplay服饰</a>
+                        <a href="../category/周边.html" class="text-gray-800 hover:text-primary font-medium">周边饰品</a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+                        <a href="../cart.html" class="relative text-gray-600 hover:text-primary">
+                            <i class="fa fa-shopping-cart text-lg"></i>
+                            <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                        </a>
+                        <button class="text-gray-600 hover:text-primary"><i class="fa fa-user-circle text-lg"></i></button>
+                        <button class="md:hidden text-gray-600 hover:text-primary" id="mobileMenuBtn">
+                            <i class="fa fa-bars text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="../萌次元.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">首页</a>
+                <a href="../category/figurines.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">手办模型</a>
+                <a href="../category/comics.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">同人漫画</a>
+                <a href="../category/cosplay服装.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">Cosplay服饰</a>
+                <a href="../category/周边.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">周边饰品</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16 pb-20">
+        <!-- 面包屑导航 -->
+        <div class="bg-white border-b border-gray-200 py-4">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center text-sm text-gray-500">
+                    <a href="../萌次元.html" class="hover:text-primary">首页</a>
+                    <span class="mx-2">/</span>
+                    <a href="../category/cosplay服装.html" class="hover:text-primary">Cosplay服饰</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-gray-700">动漫主题卫衣</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商品详情 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+                    <!-- 商品图片区域 -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                            <!-- 主图 -->
+                            <div class="relative">
+                                <img id="mainImage" src="服装.jpg" alt="动漫主题卫衣" class="w-full h-[500px] object-cover product-zoom">
+                                <div class="absolute top-4 left-4">
+                                    <span class="bg-secondary text-white text-xs font-bold px-2 py-1 rounded animate-bounce-slow">新品上市</span>
+                                </div>
+                                <button class="absolute top-4 right-4 bg-white/80 hover:bg-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa fa-heart-o text-xl"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- 缩略图 -->
+                            <div class="grid grid-cols-4 gap-2 p-4">
+                                <button class="border-2 border-primary" onclick="changeMainImage('https://picsum.photos/id/1074/800/800', '正面')">
+                                    <img src="服装.jpg" alt="正面" class="w-full h-20 object-cover">
+                                </button>
+                                <button onclick="changeMainImage('https://picsum.photos/id/1075/800/800', '背面')">
+                                    <img src="服装.jpg" alt="背面" class="w-full h-20 object-cover">
+                                </button>
+                                <button onclick="changeMainImage('https://picsum.photos/id/1076/800/800', '细节')">
+                                    <img src="服装.jpg" alt="细节" class="w-full h-20 object-cover">
+                                </button>
+                                <button onclick="changeMainImage('https://picsum.photos/id/1077/800/800', '搭配')">
+                                    <img src="服装.jpg" alt="搭配" class="w-full h-20 object-cover">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 商品信息区域 -->
+                    <div class="lg:col-span-3">
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">动漫主题卫衣</h1>
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(86条评价)</span>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-primary font-bold text-3xl">¥159.00</span>
+                                <span class="text-gray-400 line-through text-sm ml-2">¥199.00</span>
+                                <span class="bg-secondary/10 text-secondary text-xs font-bold px-2 py-1 rounded ml-4">限时优惠</span>
+                            </div>
+                            
+                            
+                            
+                            <div class="mb-4">
+                                <h3 class="font-medium text-gray-700 mb-2">尺寸选择</h3>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button class="size-option border rounded-lg py-2 text-center active-size">S</button>
+                                    <button class="size-option border rounded-lg py-2 text-center">M</button>
+                                    <button class="size-option border rounded-lg py-2 text-center">L</button>
+                                    <button class="size-option border rounded-lg py-2 text-center">XL</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-medium text-gray-700 mb-2">颜色选择</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="w-10 h-10 rounded-full bg-black border-2 border-primary" title="黑色"></button>
+                                    <button class="w-10 h-10 rounded-full bg-white border border-gray-300 hover:border-primary" title="白色"></button>
+                                    <button class="w-10 h-10 rounded-full bg-blue-500 border border-gray-300 hover:border-primary" title="蓝色"></button>
+                                    <button class="w-10 h-10 rounded-full bg-red-500 border border-gray-300 hover:border-primary" title="红色"></button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h3 class="font-medium text-gray-700 mb-2">购买数量</h3>
+                                <div class="flex items-center w-32">
+                                    <button class="w-10 h-10 border border-gray-300 rounded-l-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(-1)">-</button>
+                                    <input type="number" id="quantity" value="1" min="1" class="w-16 h-10 border-t border-b border-gray-300 text-center quantity-input">
+                                    <button class="w-10 h-10 border border-gray-300 rounded-r-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(1)">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button class="flex-1 bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center" onclick="addToCart()">
+                                    <i class="fa fa-shopping-cart mr-2"></i> 加入购物车
+                                </button>
+                                <button class="w-16 bg-white border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium py-3 rounded-lg transition-colors flex items-center justify-center">
+                                    <i class="fa fa-heart-o"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">库存信息</h3>
+                                <p class="text-gray-600">库存: <span class="text-primary font-semibold">218件</span></p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">配送信息</h3>
+                                <p class="text-gray-600">预计发货时间: 付款后24小时内</p>
+                                <p class="text-gray-600">配送方式: 顺丰快递 (满99元免运费)</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">商品编号</h3>
+                                <p class="text-gray-600">ANIME-WEAR-003</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">材质说明</h3>
+                                <p class="text-gray-600">• 面料: 80%棉，20%聚酯纤维</p>
+                                <p class="text-gray-600">• 特点: 柔软舒适，不易变形，印花牢固</p>
+                                <p class="text-gray-600">• 洗涤建议: 30℃以下机洗，反面洗涤，不可漂白</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 商品描述 -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="border-b border-gray-200">
+                        <div class="flex flex-wrap">
+                            <button class="description-tab active-tab px-6 py-4 font-medium text-primary border-b-2 border-primary">商品详情</button>
+                            <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">尺寸信息</button>
+                            <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">用户评价</button>
+                            <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">常见问题</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content p-6">
+                        <div class="active-content">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">商品详情</h3>
+                            <div class="space-y-4">
+                                <p class="text-gray-600">这款动漫主题卫衣是我们2025年春季新品，采用高品质面料制作，穿着舒适透气，同时保持良好的版型。</p>
+                                <p class="text-gray-600">卫衣正面印有热门动漫角色的精美图案，背面则有品牌标志性LOGO，无论是日常穿着还是参加漫展都非常合适。</p>
+                                <p class="text-gray-600">我们与官方正版授权合作，确保所有图案均为正版设计，品质有保障。</p>
+                                
+                                <h4 class="text-lg font-semibold text-gray-800 mt-6 mb-3">产品特点</h4>
+                                <ul class="list-disc pl-5 text-gray-600 space-y-2">
+                                    <li>高品质数码印花，色彩鲜艳，不易褪色</li>
+                                    <li>宽松版型，适合各种身材穿着</li>
+                                    <li>罗纹袖口和下摆，不易变形</li>
+                                    <li>重磅面料，适合春秋季节穿着</li>
+                                    <li>每个图案均经过精心设计，还原度高</li>
+                                </ul>
+                                
+                                <h4 class="text-lg font-semibold text-gray-800 mt-6 mb-3">设计细节</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                                    <img src="服装.jpg" alt="卫衣正面图案" class="rounded-lg shadow-sm">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="hidden-content">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">尺寸信息</h3>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50">
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">尺寸</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">胸围(cm)</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">衣长(cm)</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">袖长(cm)</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">适合身高</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">S</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">104</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">68</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">58</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">160-165cm</td>
+                                        </tr>
+                                        <tr class="bg-gray-50">
+                                            <td class="px-6 py-4 whitespace-nowrap">M</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">110</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">70</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">60</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">165-170cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">L</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">116</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">72</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">62</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">170-175cm</td>
+                                        </tr>
+                                        <tr class="bg-gray-50">
+                                            <td class="px-6 py-4 whitespace-nowrap">XL</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">122</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">74</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">64</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">175-180cm</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-3">测量说明</h4>
+                                <p class="text-gray-600 mb-4">所有尺寸均为平铺测量，单位为厘米，由于测量方法不同，可能存在1-3cm的误差。</p>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="hidden-content">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">用户评价 (86)</h3>
+                            <div class="space-y-6">
+                                <div class="border-b border-gray-200 pb-6">
+                                    <div class="flex items-center mb-3">
+                                        <img src="https://picsum.photos/id/1027/50/50" alt="用户头像" class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">小樱的百变小樱</h4>
+                                            <div class="flex text-yellow-400 text-sm">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <span class="ml-auto text-gray-500 text-sm">2025-05-12</span>
+                                    </div>
+                                    <p class="text-gray-600">衣服质量很好，图案也很清晰，穿上很舒服，和图片一模一样。我买的是鸣人款，朋友都说好看，已经推荐给其他漫友了！</p>
+                                    <div class="flex gap-2 mt-3">
+                                        <img src="https://picsum.photos/id/1081/100/100" alt="用户晒图" class="w-20 h-20 object-cover rounded-lg">
+                                        <img src="https://picsum.photos/id/1082/100/100" alt="用户晒图" class="w-20 h-20 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                                
+                                <div class="border-b border-gray-200 pb-6">
+                                    <div class="flex items-center mb-3">
+                                        <img src="https://picsum.photos/id/1028/50/50" alt="用户头像" class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Luffy_海贼王</h4>
+                                            <div class="flex text-yellow-400 text-sm">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                        </div>
+                                        <span class="ml-auto text-gray-500 text-sm">2025-05-08</span>
+                                    </div>
+                                    <p class="text-gray-600">物流很快，三天就收到了。衣服版型很正，我买的M码刚好合适。路飞的图案印得很精细，细节都还原得很好。唯一缺点是有点薄，适合春天穿。</p>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex items-center mb-3">
+                                        <img src="https://picsum.photos/id/1029/50/50" alt="用户头像" class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">火影迷</h4>
+                                            <div class="flex text-yellow-400 text-sm">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                        <span class="ml-auto text-gray-500 text-sm">2025-05-01</span>
+                                    </div>
+                                    <p class="text-gray-600">佐助的图案太帅了！衣服面料很柔软，穿着很舒服。我身高175cm，体重70kg，买的L码刚好，稍微宽松一点。客服态度也很好，有问必答。</p>
+                                    <div class="flex gap-2 mt-3">
+                                        <img src="https://picsum.photos/id/1083/100/100" alt="用户晒图" class="w-20 h-20 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 text-center">
+                                <button class="bg-white border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium py-2 px-6 rounded-lg transition-colors">
+                                    查看全部86条评价
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="hidden-content">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">常见问题</h3>
+                            <div class="space-y-4">
+                                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                    <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                                        <span>卫衣的洗涤方式有什么需要注意的？</span>
+                                        <i class="fa fa-chevron-down text-gray-500"></i>
+                                    </button>
+                                    <div class="faq-content p-4 bg-gray-50 border-t border-gray-200">
+                                        <p class="text-gray-600">为保持卫衣图案的持久度和衣服的版型，建议反面洗涤，使用30℃以下的温水，避免使用漂白剂。可机洗，但建议轻柔模式。晾干时平铺晾晒，避免阳光直射。</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                    <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                                        <span>如何选择合适的尺码？</span>
+                                        <i class="fa fa-chevron-down text-gray-500"></i>
+                                    </button>
+                                    <div class="faq-content hidden p-4 bg-gray-50 border-t border-gray-200">
+                                        <p class="text-gray-600">我们提供详细的尺码表，您可以根据自己的身高、体重和胸围参考选择。如果您比较喜欢宽松的穿着效果，建议选择比平时大一码的尺寸。如果您对尺码有疑问，可以联系客服咨询。</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                    <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                                        <span>图案会褪色或脱落吗？</span>
+                                        <i class="fa fa-chevron-down text-gray-500"></i>
+                                    </button>
+                                    <div class="faq-content hidden p-4 bg-gray-50 border-t border-gray-200">
+                                        <p class="text-gray-600">我们采用高品质的数码印花工艺，图案牢固度高。在正常洗涤和穿着情况下，不会轻易褪色或脱落。但请注意避免长时间浸泡和使用刺激性洗涤剂，以延长图案的使用寿命。</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                    <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                                        <span>如果收到的衣服有质量问题怎么办？</span>
+                                        <i class="fa fa-chevron-down text-gray-500"></i>
+                                    </button>
+                                    <div class="faq-content hidden p-4 bg-gray-50 border-t border-gray-200">
+                                        <p class="text-gray-600">如果您收到的商品存在质量问题，请在收到商品后的7天内联系客服，并提供相关照片。我们会为您安排退换货服务，往返运费由我们承担。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+       

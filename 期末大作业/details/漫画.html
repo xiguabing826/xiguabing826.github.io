@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>萌次元 - 名侦探柯南漫画</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3A7BFF', // 柯南蓝
+            secondary: '#FF5252', // 柯南红
+            accent: '#FFD700', // 点缀金
+            dark: '#2C3539',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+          }
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+      }
+      .product-zoom {
+        transition: transform 0.3s ease;
+      }
+      .product-zoom:hover {
+        transform: scale(1.05);
+      }
+      .active-size {
+        background-color: theme('colors.primary');
+        color: white;
+        border-color: theme('colors.primary');
+      }
+      .animate-bounce-slow {
+        animation: bounce 3s infinite;
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="glass-effect border-b border-gray-200/30">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="../萌次元.html" class="flex items-center">
+              <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+              <i class="fa fa-heart text-secondary animate-pulse-slow"></i>
+            </a>
+          </div>
+          <nav class="hidden md:flex space-x-8">
+            <a href="../萌次元.html" class="text-gray-800 hover:text-primary font-medium">首页</a>
+            <a href="../category/figurines.html" class="text-gray-800 hover:text-primary font-medium">手办模型</a>
+            <a href="../category/comics.html" class="text-gray-800 hover:text-primary font-medium">同人漫画</a>
+            <a href="../category/cosplay服装.html" class="text-gray-800 hover:text-primary font-medium">Cosplay服饰</a>
+            <a href="../category/周边.html" class="text-gray-800 hover:text-primary font-medium">周边饰品</a>
+          </nav>
+          <div class="flex items-center space-x-4">
+            <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+            <a href="../cart.html" class="relative text-gray-600 hover:text-primary">
+              <i class="fa fa-shopping-cart text-lg"></i>
+              <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+            </a>
+            <button class="text-gray-600 hover:text-primary"><i class="fa fa-user-circle text-lg"></i></button>
+            <button class="md:hidden text-gray-600 hover:text-primary" id="mobileMenuBtn">
+              <i class="fa fa-bars text-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="../萌次元.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">首页</a>
+        <a href="../category/figurines.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">手办模型</a>
+        <a href="../category/comics.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">同人漫画</a>
+        <a href="../category/cosplay服装.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">Cosplay服饰</a>
+        <a href="../category/周边.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">周边饰品</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16 pb-20">
+    <!-- 面包屑导航 -->
+    <div class="bg-white border-b border-gray-200 py-4">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center text-sm text-gray-500">
+          <a href="../萌次元.html" class="hover:text-primary">首页</a>
+          <span class="mx-2">/</span>
+          <a href="../category/comics.html" class="hover:text-primary">同人漫画</a>
+          <span class="mx-2">/</span>
+          <span class="text-gray-700">名侦探柯南漫画</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品详情 -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          <!-- 商品图片区域 -->
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+              <!-- 主图 -->
+              <div class="relative">
+                <img id="mainImage" src="漫画.jpg" alt="名侦探柯南漫画" class="w-full h-[500px] object-cover product-zoom">
+                <div class="absolute top-4 left-4">
+                  <span class="bg-secondary text-white text-xs font-bold px-2 py-1 rounded animate-bounce-slow">热销中</span>
+                </div>
+                <button class="absolute top-4 right-4 bg-white/80 hover:bg-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fa fa-heart-o text-xl"></i>
+                </button>
+              </div>
+              
+              <!-- 缩略图 -->
+              <div class="grid grid-cols-4 gap-2 p-4">
+                <button class="border-2 border-primary" onclick="changeMainImage('https://picsum.photos/id/1110/800/800', '封面')">
+                  <img src="漫画.jpg" alt="封面" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1111/800/800', '内页')">
+                  <img src="漫画.jpg" alt="内页" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1112/800/800', '彩页')">
+                  <img src="漫画.jpg" alt="彩页" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1113/800/800', '书脊')">
+                  <img src="漫画.jpg" alt="书脊" class="w-full h-20 object-cover">
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 商品信息区域 -->
+          <div class="lg:col-span-3">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">名侦探柯南漫画 第100卷</h1>
+            <div class="flex items-center mb-4">
+              <div class="text-yellow-400 flex">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <span class="text-gray-500 text-sm ml-2">(328条评价)</span>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-xl mb-6">
+              <div class="flex items-center mb-4">
+                <span class="text-primary font-bold text-3xl">¥25.00</span>
+                <span class="text-gray-400 line-through text-sm ml-2">¥35.00</span>
+                <span class="bg-secondary/10 text-secondary text-xs font-bold px-2 py-1 rounded ml-4">限时优惠</span>
+              </div>
+              
+              <div class="mb-4">
+                <h3 class="font-medium text-gray-700 mb-2">卷数选择</h3>
+                <div class="grid grid-cols-5 gap-2">
+                  <button class="size-option border rounded-lg py-2 text-center active-size">第100卷</button>
+                  <button class="size-option border rounded-lg py-2 text-center">第99卷</button>
+                  <button class="size-option border rounded-lg py-2 text-center">第98卷</button>
+                  <button class="size-option border rounded-lg py-2 text-center">第97卷</button>
+                  <button class="size-option border rounded-lg py-2 text-center">第96卷</button>
+                </div>
+                <div class="text-right mt-2">
+                  <a href="#" class="text-primary text-sm hover:underline">查看全部卷数</a>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h3 class="font-medium text-gray-700 mb-2">版本选择</h3>
+                <div class="flex flex-wrap gap-2">
+                  <button class="w-24 h-8 rounded border border-gray-300 hover:border-primary active-size">普通版</button>
+                  <button class="w-24 h-8 rounded border border-gray-300 hover:border-primary">豪华版</button>
+                  <button class="w-24 h-8 rounded border border-gray-300 hover:border-primary">特别篇</button>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h3 class="font-medium text-gray-700 mb-2">套装选择</h3>
+                <div class="flex flex-wrap gap-2">
+                  <button class="w-32 h-8 rounded border border-gray-300 hover:border-primary active-size">单卷购买</button>
+                  <button class="w-32 h-8 rounded border border-gray-300 hover:border-primary">10卷套装</button>
+                  <button class="w-32 h-8 rounded border border-gray-300 hover:border-primary">全100卷</button>
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <h3 class="font-medium text-gray-700 mb-2">购买数量</h3>
+                <div class="flex items-center w-32">
+                  <button class="w-10 h-10 border border-gray-300 rounded-l-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(-1)">-</button>
+                  <input type="number" id="quantity" value="1" min="1" class="w-16 h-10 border-t border-b border-gray-300 text-center quantity-input">
+                  <button class="w-10 h-10 border border-gray-300 rounded-r-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(1)">+</button>
+                </div>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button class="flex-1 bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center" onclick="addToCart()">
+                  <i class="fa fa-shopping-cart mr-2"></i> 加入购物车
+                </button>
+                <button class="w-16 bg-white border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium py-3 rounded-lg transition-colors flex items-center justify-center">
+                  <i class="fa fa-heart-o"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">库存信息</h3>
+                <p class="text-gray-600">库存: <span class="text-primary font-semibold">562件</span></p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">配送信息</h3>
+                <p class="text-gray-600">预计发货时间: 付款后24小时内</p>
+                <p class="text-gray-600">配送方式: 中通/韵达快递 (满99元免运费)</p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">商品编号</h3>
+                <p class="text-gray-600">DETECTIVE-CONAN-100</p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">出版信息</h3>
+                <p class="text-gray-600">• 出版社: 长春出版社</p>
+                <p class="text-gray-600">• 作者: [日] 青山刚昌</p>
+                <p class="text-gray-600">• 译者: natuya</p>
+                <p class="text-gray-600">• 出版日期: 2025年3月</p>
+                <p class="text-gray-600">• 页数: 192页</p>
+                <p class="text-gray-600">• 装帧: 平装</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 商品描述 -->
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="border-b border-gray-200">
+            <div class="flex flex-wrap">
+              <button class="description-tab active-tab px-6 py-4 font-medium text-primary border-b-2 border-primary">内容简介</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">作者简介</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">用户评价</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">常见问题</button>
+            </div>
+          </div>
+          
+          <div class="tab-content p-6">
+            <div class="active-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">内容简介</h3>
+              <div class="space-y-4">
+                <p class="text-gray-600">《名侦探柯南》是日本漫画家青山刚昌创作的著名推理漫画，讲述了高中生侦探工藤新一被黑衣组织灌下毒药后缩小为小学生，化名为江户川柯南，继续追查黑衣组织并解决各种疑难案件的故事。</p>
+                
+                <p class="text-gray-600">本卷为第100卷，收录了以下精彩案件：</p>
+                
+                <ul class="list-disc pl-5 text-gray-600 space-y-2">
+                  <li><strong>第993话 令人震惊的事实</strong> - 柯南等人在露营地遇到了一起离奇的死亡事件，看似意外的背后却隐藏着惊人的真相...</li>
+                  <li><strong>第994话 消失的证据</strong> - 关键证据在众人眼前神秘消失，柯南能否在凶手销毁证据前找到真相？</li>
+                  <li><strong>第995话 最终对决</strong> - 柯南与黑衣组织的正面交锋，这场智力与勇气的较量究竟谁能胜出？</li>
+                  <li><strong>第996话 真相大白</strong> - 黑衣组织的惊天阴谋即将揭晓，工藤新一能否恢复身份？</li>
+                  <li><strong>第997话 新的开始</strong> - 事件解决后，柯南和伙伴们迎来了新的挑战，他们将如何应对？</li>
+                </ul>
+                
+                <p class="text-gray-600">此外，本卷还特别收录了青山刚昌老师的创作访谈，以及未公开的分镜稿和设定资料，是柯南粉丝不容错过的珍藏版本！</p>
+                
+                <div class="mt-6">
+                  <h4 class="text-lg font-semibold text-gray-800 mb-3">特别附录</h4>
+                  <ul class="list-disc pl-5 text-gray-600 space-y-2">
+                    <li>青山刚昌创作访谈：揭秘《名侦探柯南》连载30年的幕后故事</li>
+                    <li>黑衣组织全成员档案：深入解析每个成员的背景与任务</li>
+                    <li>柯南道具大公开：麻醉手表、蝴蝶结变声器等秘密武器的设计原理</li>
+                    <li>第100卷特别彩页：超豪华全彩拉页，收录关键角色与经典场景</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="hidden-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">作者简介</h3>
+              <div class="space-y-4">
+                <div class="flex flex-col md:flex-row gap-6">
+                  <img src="青山刚昌.jpg" alt="青山刚昌" class="w-40 h-40 object-cover rounded-lg mx-auto md:mx-0">
+                  <div>
+                    <p class="text-gray-600">青山刚昌（Aoyama Gōshō），1963年6月21日出生于日本鸟取县，是日本著名漫画家，以创作《名侦探柯南》系列而闻名于世。</p>
+                    <p class="text-gray-600">他的漫画风格独特，推理逻辑严密，角色形象鲜明，深受全球读者喜爱。《名侦探柯南》自1994年开始连载以来，已成为日本最长寿的漫画之一，单行本全球累计发行量超过2.5亿册。</p>
+                    <p class="text-gray-600">除了《名侦探柯南》，青山刚昌还创作了《魔术快斗》《城市风云儿》等作品，展现了他在不同题材领域的创作才华。</p>
+                    
+                    <div class="mt-4">
+                      <h4 class="font-semibold text-gray-800 mb-2">创作历程</h4>
+                      <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                        <li>1986年：凭借《约定》获得第19届小学馆新人漫画奖，正式出道</li>
+                        <li>1987年：开始连载《城市风云儿》，广受好评</li>
+                        <li>1994年：推出《名侦探柯南》，迅速成为热门作品</li>
+                        <li>2017年：《名侦探柯南》连载突破1000话，创造日本漫画史纪录</li>
+                        <li>2023年：《名侦探柯南》第100卷发行，纪念连载30周年</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="hidden-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">用户评价 (328)</h3>
+              <div class="space-y-6">
+                <div class="border-b border-gray-200 pb-6">
+                  <div class="flex items-center mb-3">
+                    <img src="https://picsum.photos/id/1028/50/50" alt="用户头像" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                      <h4 class="font-medium text-gray-800">柯南迷</h4>
+                      <div class="flex text-yellow-400 text-sm">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                    <span class="ml-auto text-gray-500 text-sm">2025-05-20</span>
+                  </div>
+                  <p class="text-gray-600">等了好久终于等到第100卷！黑衣组织的剧情太精彩了，柯南和琴酒的对决让人热血沸腾。附录的创作访谈也很有意思，能看到青山老师的创作思路。印刷质量很好，彩页超精美！</p>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-6">
+                  <div class="flex items-center mb-3">
+                    <img src="https://picsum.photos/id/1028/50/50" alt="用户头像" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                      <h4 class="font-medium text-gray-800">灰原哀的红茶</h4>
+                      <div class="flex text-yellow-400 text-sm">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                      </div>
+                    </div>
+                    <span class="ml-auto text-gray-500 text-sm">2025-05-18</span>
+                  </div>
+                  <p class="text-gray-600">作为从小学就开始追柯南的老粉，第100卷必须收藏！灰原哀的戏份增加了很多，和柯南的互动很有爱。案件设计也很巧妙，反转很精彩。唯一遗憾的是单行本没有收录最新的主线剧情，希望下一卷能看到更多进展。</p>
+                </div>
+                
+                <div>
+                  <div class="flex items-center mb-3">
+                    <img src="https://picsum.photos/id/1028/50/50" alt="用户头像" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                      <h4 class="font-medium text-gray-800">平次的剑道</h4>
+                      <div class="flex text-yellow-400 text-sm">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                      </div>
+                    </div>
+                    <span class="ml-auto text-gray-500 text-sm">2025-05-15</span>
+                  </div>
+                  <p class="text-gray-600">本卷大阪黑鸡的戏份太少了！差评！不过案件质量还不错，尤其是露营地那个案子，手法很新颖。书的纸张质量很好，印刷清晰，就是封面有点容易脏，建议大家买个书套保护一下。</p>
+                </div>
+              </div>
+              
+              <div class="mt-8 text-center">
+                <button class="bg-white border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium py-2 px-6 rounded-lg transition-colors">
+                  查看全部328条评价
+                </button>
+              </div>
+            </div>
+            
+            <div class="hidden-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">常见问题</h3>
+              <div class="space-y-4">
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                  <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                    <span>《名侦探柯南》漫画和动画有什么区别？</span>
+                    <i class="fa fa-chevron-down text-gray-500"></i>
+                  </button>
+                  <div class="faq-content p-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600">漫画是青山刚昌的原作，动画是根据漫画改编的影视作品。动画会添加一些原创剧情和动画原创案件，进度也会比漫画慢。建议先看漫画了解主线剧情，再看动画补充细节。</p>
+                  </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                  <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                    <span>豪华版和普通版有什么区别？</span>
+                    <i class="fa fa-chevron-down text-gray-500"></i>
+                  </button>
+                  <div class="faq-content hidden p-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600">豪华版相比普通版有以下升级：</p>
+                    <ul class="list-disc pl-5 text-gray-600 space-y-1 mt-2">
+                      <li>采用精装硬壳装帧，封面烫金工艺</li>
+                      <li>内页使用高级纸张，色彩还原更逼真</li>
+                      <li>附赠独家精美海报和角色卡片</li>
+                      <li>包含更多作者访谈和幕后设定资料</li>
+                      <li>每卷独立编号，限量发售</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                  <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                    <span>如何判断漫画的真伪？</span>
+                    <i class="fa fa-chevron-down text-gray-500"></i>
+                  </button>
+                  <div class="faq-content hidden p-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600">正版《名侦探柯南》漫画由长春出版社出版，购买时请注意以下几点：</p>
+                    <ul class="list-disc pl-5 text-gray-600 space-y-1 mt-2">
+                      <li>封面印有"长春出版社"和"名侦探柯南"官方标志</li>
+                      <li>版权页有ISBN书号和出版社信息</li>
+                      <li>内页印刷清晰，色彩鲜艳，无异味</li>
+                      <li>豪华版有防伪标签，可通过官网查询真伪</li>
+                      <li>建议通过正规渠道购买，避免低价盗版</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                  <button class="faq-toggle w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50" onclick="toggleFaq(this)">
+                    <span>漫画的更新频率是多久？</span>
+                    <i class="fa fa-chevron-down text-gray-500"></i>
+                  </button>
+                  <div class="faq-content hidden p-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600">《名侦探柯南》漫画在日本的《周刊少年Sunday》上连载，通常每周更新一话。中文版由长春出版社引进，一般每月出版1-2卷。遇到作者休刊或特殊情况，更新可能会延迟。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">萌次元</h3>
+          <p class="text-gray-400 mb-4">专注于二次元文化衍生品，为您带来正版、高品质的动漫周边产品。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-wechat text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-instagram text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="../category/figurines.html" class="text-gray-400 hover:text-white transition-colors">手办模型</a></li>
+            <li><a href="../category/comics.html" class="text-gray-400 hover:text-white transition-colors">同人漫画</a></li>
+            <li><a href="../category/cosplay.html" class="text-gray-400 hover:text-white transition-colors">Cosplay服饰</a></li>
+            <li><a href="../category/accessories.html" class="text-gray-400 hover:text-white transition-colors">周边饰品</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">客户服务</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">购物指南</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">支付方式</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">配送说明</a></

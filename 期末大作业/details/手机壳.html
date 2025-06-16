@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>萌次元 - 动漫角色定制手机壳</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF5E6C', // 活力红
+            secondary: '#646FF0', // 科技蓝
+            accent: '#FFD835', // 活力黄
+            dark: '#2C3539',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+          }
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+      }
+      .product-zoom {
+        transition: transform 0.3s ease;
+      }
+      .product-zoom:hover {
+        transform: scale(1.05);
+      }
+      .active-size {
+        background-color: theme('colors.primary');
+        color: white;
+        border-color: theme('colors.primary');
+      }
+      .animate-bounce-slow {
+        animation: bounce 3s infinite;
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="glass-effect border-b border-gray-200/30">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="../萌次元.html" class="flex items-center">
+              <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+              <i class="fa fa-heart text-accent animate-pulse-slow"></i>
+            </a>
+          </div>
+          <nav class="hidden md:flex space-x-8">
+            <a href="../萌次元.html" class="text-gray-800 hover:text-primary font-medium">首页</a>
+            <a href="../category/figurines.html" class="text-gray-800 hover:text-primary font-medium">手办模型</a>
+            <a href="../category/comics.html" class="text-gray-800 hover:text-primary font-medium">同人漫画</a>
+            <a href="../category/cosplay服装.html" class="text-gray-800 hover:text-primary font-medium">Cosplay服饰</a>
+            <a href="../category/周边.html" class="text-gray-800 hover:text-primary font-medium">周边饰品</a>
+          </nav>
+          <div class="flex items-center space-x-4">
+            <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+            <a href="../cart.html" class="relative text-gray-600 hover:text-primary">
+              <i class="fa fa-shopping-cart text-lg"></i>
+              <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+            </a>
+            <button class="text-gray-600 hover:text-primary"><i class="fa fa-user-circle text-lg"></i></button>
+            <button class="md:hidden text-gray-600 hover:text-primary" id="mobileMenuBtn">
+              <i class="fa fa-bars text-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="../萌次元.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">首页</a>
+        <a href="../category/figurines.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">手办模型</a>
+        <a href="../category/comics.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">同人漫画</a>
+        <a href="../category/cosplay服装.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">Cosplay服饰</a>
+        <a href="../category/周边.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">周边饰品</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16 pb-20">
+    <!-- 面包屑导航 -->
+    <div class="bg-white border-b border-gray-200 py-4">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center text-sm text-gray-500">
+          <a href="../萌次元.html" class="hover:text-primary">首页</a>
+          <span class="mx-2">/</span>
+          <a href="../category/周边.html" class="hover:text-primary">周边饰品</a>
+          <span class="mx-2">/</span>
+          <span class="text-gray-700">动漫角色定制手机壳</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品详情 -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          <!-- 商品图片区域 -->
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+              <!-- 主图 -->
+              <div class="relative">
+                <img id="mainImage" src="手机壳.jpg" alt="动漫角色定制手机壳" class="w-full h-[500px] object-cover product-zoom">
+                <div class="absolute top-4 left-4">
+                  <span class="bg-secondary text-white text-xs font-bold px-2 py-1 rounded animate-bounce-slow">新品上市</span>
+                </div>
+                <button class="absolute top-4 right-4 bg-white/80 hover:bg-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fa fa-heart-o text-xl"></i>
+                </button>
+              </div>
+              
+              <!-- 缩略图 -->
+              <div class="grid grid-cols-4 gap-2 p-4">
+                <button class="border-2 border-primary" onclick="changeMainImage('https://picsum.photos/id/1090/800/800', '正面')">
+                  <img src="手机壳.jpg" alt="正面" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1091/800/800', '背面')">
+                  <img src="手机壳.jpg" alt="背面" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1092/800/800', '细节')">
+                  <img src="手机壳.jpg" alt="细节" class="w-full h-20 object-cover">
+                </button>
+                <button onclick="changeMainImage('https://picsum.photos/id/1093/800/800', '适配机型')">
+                  <img src="手机壳.jpg" alt="适配机型" class="w-full h-20 object-cover">
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 商品信息区域 -->
+          <div class="lg:col-span-3">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">动漫角色定制手机壳</h1>
+            <div class="flex items-center mb-4">
+              <div class="text-yellow-400 flex">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <span class="text-gray-500 text-sm ml-2">(214条评价)</span>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-xl mb-6">
+              <div class="flex items-center mb-4">
+                <span class="text-primary font-bold text-3xl">¥49.00</span>
+                <span class="text-gray-400 line-through text-sm ml-2">¥69.00</span>
+                <span class="bg-secondary/10 text-secondary text-xs font-bold px-2 py-1 rounded ml-4">限时优惠</span>
+              </div>
+              
+              <div class="mb-4">
+                <h3 class="font-medium text-gray-700 mb-2">尺寸/机型选择</h3>
+                <div class="grid grid-cols-4 gap-2">
+                  <button class="size-option border rounded-lg py-2 text-center active-size">iPhone 15</button>
+                  <button class="size-option border rounded-lg py-2 text-center">iPhone 14</button>
+                  <button class="size-option border rounded-lg py-2 text-center">华为 Pura70</button>
+                  <button class="size-option border rounded-lg py-2 text-center">小米 14</button>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h3 class="font-medium text-gray-700 mb-2">材质选择</h3>
+                <div class="flex flex-wrap gap-2">
+                  <button class="w-16 h-8 rounded border border-gray-300 hover:border-primary active-size">TPU软壳</button>
+                  <button class="w-16 h-8 rounded border border-gray-300 hover:border-primary">PC硬壳</button>
+                  <button class="w-16 h-8 rounded border border-gray-300 hover:border-primary">玻璃壳</button>
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <h3 class="font-medium text-gray-700 mb-2">购买数量</h3>
+                <div class="flex items-center w-32">
+                  <button class="w-10 h-10 border border-gray-300 rounded-l-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(-1)">-</button>
+                  <input type="number" id="quantity" value="1" min="1" class="w-16 h-10 border-t border-b border-gray-300 text-center quantity-input">
+                  <button class="w-10 h-10 border border-gray-300 rounded-r-lg flex items-center justify-center hover:bg-gray-100" onclick="updateQuantity(1)">+</button>
+                </div>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button class="flex-1 bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center" onclick="addToCart()">
+                  <i class="fa fa-shopping-cart mr-2"></i> 加入购物车
+                </button>
+                <button class="w-16 bg-white border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium py-3 rounded-lg transition-colors flex items-center justify-center">
+                  <i class="fa fa-heart-o"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">库存信息</h3>
+                <p class="text-gray-600">库存: <span class="text-primary font-semibold">326件</span></p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">配送信息</h3>
+                <p class="text-gray-600">预计发货时间: 付款后48小时内</p>
+                <p class="text-gray-600">配送方式: 中通/圆通快递 (满59元免运费)</p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">商品编号</h3>
+                <p class="text-gray-600">PHONE-CASE-005</p>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">定制说明</h3>
+                <p class="text-gray-600">• 支持热门动漫角色图案定制（联系客服提供角色素材）</p>
+                <p class="text-gray-600">• 图案采用UV打印工艺，清晰不褪色</p>
+                <p class="text-gray-600">• 软壳支持无线充电，硬壳/玻璃壳建议取下充电</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 商品描述 -->
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="border-b border-gray-200">
+            <div class="flex flex-wrap">
+              <button class="description-tab active-tab px-6 py-4 font-medium text-primary border-b-2 border-primary">商品详情</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">尺寸/机型</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">用户评价</button>
+              <button class="description-tab px-6 py-4 font-medium text-gray-600 hover:text-gray-800">常见问题</button>
+            </div>
+          </div>
+          
+          <div class="tab-content p-6">
+            <div class="active-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">商品详情</h3>
+              <div class="space-y-4">
+                <p class="text-gray-600">这款动漫角色定制手机壳，支持你喜欢的任意动漫角色图案定制，把热爱“装”在手机上！</p>
+                <p class="text-gray-600">采用高精度UV打印技术，图案色彩饱满、细节清晰，还原角色魅力。多机型适配，满足不同手机需求；

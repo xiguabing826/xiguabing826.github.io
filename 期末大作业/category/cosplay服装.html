@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萌次元 - Cosplay服饰</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF69B4',
+                        secondary: '#8A2BE2',
+                        accent: '#FFD700',
+                        dark: '#2C2F33',
+                        'anime-blue': '#4169E1',
+                        'anime-pink': '#FFB6C1',
+                        'anime-purple': '#9370DB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            }
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="glass-effect border-b border-gray-200/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <a href="../萌次元.html" class="flex items-center">
+                            <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+                            <i class="fa fa-heart text-accent animate-pulse-slow"></i>
+                        </a>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="../萌次元.html" class="text-gray-800 hover:text-primary font-medium">首页</a>
+                        <a href="#" class="text-gray-800 hover:text-primary font-medium">商品分类</a>
+                        <a href="#" class="text-gray-800 hover:text-primary font-medium">活动中心</a>
+                        <a href="#" class="text-gray-800 hover:text-primary font-medium">社区</a>
+                        <a href="#" class="text-gray-800 hover:text-primary font-medium">关于我们</a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+                        <button class="relative text-gray-600 hover:text-primary">
+                            <i class="fa fa-shopping-cart text-lg"></i>
+                            <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                        </button>
+                        <button class="text-gray-600 hover:text-primary"><i class="fa fa-user-circle text-lg"></i></button>
+                        <button class="md:hidden text-gray-600 hover:text-primary" id="mobileMenuBtn">
+                            <i class="fa fa-bars text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="../萌次元.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">首页</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">商品分类</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">活动中心</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">社区</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-primary">关于我们</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- 面包屑导航 -->
+        <div class="bg-white border-b border-gray-200 py-4">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center text-sm text-gray-500">
+                    <a href="../萌次元.html" class="hover:text-primary">首页</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-gray-700">Cosplay服饰</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分类导航 -->
+        <div class="category-bar bg-white shadow-sm py-4 px-4 md:px-8 overflow-x-auto">
+            <div class="flex space-x-4 w-max">
+                <a href="../萌次元.html" class="category-item px-4 py-2 text-gray-700 hover:bg-primary/10 transition-colors">全部分类</a>
+                <a href="figurines.html" class="category-item px-4 py-2 text-gray-700 hover:bg-primary/10 transition-colors">手办模型</a>
+                <a href="comics.html" class="category-item px-4 py-2 text-gray-700 hover:bg-primary/10 transition-colors">同人漫画</a>
+                <a href="cosplay服装.html" class="category-item px-4 py-2 bg-primary text-white rounded-lg transition-colors">Cosplay服饰</a>
+                <a href="周边.html" class="category-item px-4 py-2 text-gray-700 hover:bg-primary/10 transition-colors">周边饰品</a>
+            </div>
+        </div>
+
+        <!-- 分类标题 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h1 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">Cosplay服饰</h1>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        专业定制各类动漫、游戏角色服装，还原度高，面料舒适，让你在漫展中脱颖而出
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 筛选和商品列表 -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- 筛选侧边栏 -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">筛选条件</h3>
+                            <div class="mb-6">
+                                <h4 class="font-medium text-gray-700 mb-3">价格范围</h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">¥0-199</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">¥200-499</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">¥500-999</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">¥1000以上</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <h4 class="font-medium text-gray-700 mb-3">角色</h4>
+                                <div class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">鸣人</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">路飞</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">柯南</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">佐助</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">纲手</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">黑崎一护</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <h4 class="font-medium text-gray-700 mb-3">尺寸</h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">XS</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">S</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">M</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">L</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">XL</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span class="text-gray-600">XXL</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 rounded-lg transition-colors">
+                                应用筛选
+                            </button>
+                            <button class="w-full text-gray-600 hover:text-primary font-medium py-2 transition-colors">
+                                重置
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 商品列表 -->
+                    <div class="lg:col-span-3">
+                        <!-- 排序和视图切换 -->
+                        <div class="bg-white rounded-xl shadow-md p-4 mb-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                                <div class="flex items-center">
+                                    <span class="text-gray-600 mr-4">排序方式:</span>
+                                    <select class="border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                        <option>推荐排序</option>
+                                        <option>价格从低到高</option>
+                                        <option>价格从高到低</option>
+                                        <option>销量优先</option>
+                                        <option>新品优先</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-gray-600 mr-4">显示方式:</span>
+                                    <button class="p-2 bg-primary text-white rounded-lg mr-2">
+                                        <i class="fa fa-th-large"></i>
+                                    </button>
+                                    <button class="p-2 text-gray-500 hover:text-primary hover:bg-gray-100 rounded-lg">
+                                        <i class="fa fa-list"></i>
+                                    </button>
+                                    <span class="text-gray-600 ml-4">共72件商品</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 商品网格 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+							<a href="../details/动漫主题卫衣.html">
+							<div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+							    <div class="relative">
+							        <img src="服装.jpg" alt="动漫主题卫衣" class="w-full h-64 object-cover">
+							        <div class="absolute top-3 left-3">
+							            <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+							        </div>
+							        <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+							            <i class="fa fa-heart-o"></i>
+							        </button>
+							    </div>
+							    <div class="p-4">
+							        <div class="flex items-center mb-2">
+							            <div class="text-yellow-400 flex">
+							                <i class="fa fa-star"></i>
+							                <i class="fa fa-star"></i>
+							                <i class="fa fa-star"></i>
+							                <i class="fa fa-star"></i>
+							                <i class="fa fa-star-o"></i>
+							            </div>
+							            <span class="text-gray-500 text-sm ml-2">(86)</span>
+							        </div>
+							        <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">2025春季新款 动漫主题卫衣 宽松版型</h3>
+							        <div class="flex justify-between items-center">
+							            <div>
+							                <span class="text-primary font-bold text-lg">¥159.00</span>
+							                <span class="text-gray-400 line-through text-sm ml-2">¥199.00</span>
+							            </div>
+							            <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+							                <i class="fa fa-shopping-cart"></i>
+							            </button>
+							        </div>
+							    </div>
+							</div>
+							</a>
+                            <!-- 商品卡片 1 -->
+                            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                                <div class="relative">
+                                    <img src="服装2.jpg" alt="鸣人Cosplay服装" class="w-full h-64 object-cover">
+                                    <div class="absolute top-3 left-3">
+                                        <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+                                    </div>
+                                    <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="text-yellow-400 flex">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-o"></i>
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">(128)</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">火影忍者 鸣人Cosplay服装 正版授权 全套装</h3>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span class="text-primary font-bold text-lg">¥399.00</span>
+                                            <span class="text-gray-400 line-through text-sm ml-2">¥499.00</span>
+                                        </div>
+                                        <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 商品卡片 2 -->
+                            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                                <div class="relative">
+                                    <img src="服装3.jpg" alt="纲手Cosplay服装" class="w-full h-64 object-cover">
+                                    <div class="absolute top-3 left-3">
+                                        <span class="bg-anime-purple text-white text-xs font-bold px-2 py-1 rounded">预售</span>
+                                    </div>
+                                    <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="text-yellow-400 flex">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">(214)</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">火影忍者 纲手Cosplay服装 女款 正版授权</h3>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span class="text-primary font-bold text-lg">¥599.00</span>
+                                            <span class="text-gray-400 line-through text-sm ml-2">¥699.00</span>
+                                        </div>
+                                        <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 商品卡片 3 -->
+                            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                                <div class="relative">
+                                    <img src="服装4.jpg" alt="佐助Cosplay服装" class="w-full h-64 object-cover">
+                                    <div class="absolute top-3 left-3">
+                                        <span class="bg-accent text-primary text-xs font-bold px-2 py-1 rounded">限量</span>
+                                    </div>
+                                    <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="text-yellow-400 flex">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">(86)</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">火影忍者 佐助Cosplay服装 宇智波家族 正版授权</h3>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span class="text-primary font-bold text-lg">¥499.00</span>
+                                            <span class="text-gray-400 line-through text-sm ml-2">¥599.00</span>
+                                        </div>
+                                        <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 商品卡片 4 -->
+                            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                                <div class="relative">
+                                    <img src="服装5.jpg" alt="黑崎一护Cosplay服装" class="w-full h-64 object-cover">
+                                    <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="text-yellow-400 flex">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-o"></i>
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">(156)</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">死神 黑崎一护Cosplay服装 斩魄刀套装</h3>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span class="text-primary font-bold text-lg">¥549.00</span>
+                                        </div>
+                                        <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 商品卡片 5 -->
+                            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                                <div class="relative">
+                                    <img src="服装6.jpg" alt="路飞Cosplay服装" class="w-full h-64 object-cover">
+                                    <div class="absolute top-3 left-3">
+                                        <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">新品</span>
+                                    </div>
+                                    <button class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="text-yellow-400 flex">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">(72)</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">海贼王 路飞Cosplay服装 草帽小子 正版授权</h3>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span class="text-primary font-bold text-lg">¥459.00</span>
+                                            <span class="text-gray-400 line-through text-sm ml-2">¥559.00</span>
+                                        </div>
+                                        <button class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-colors">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 商品卡片 6 -->
+						

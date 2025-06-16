@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>萌次元 - 登录</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF5E6C',
+            secondary: '#646FF0',
+            accent: '#FFD835',
+            dark: '#2C3539',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+          }
+        },
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- 导航栏 -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="../萌次元.html" class="flex items-center">
+            <span class="text-2xl font-bold text-primary mr-1">萌次元</span>
+            <i class="fa fa-heart text-accent animate-pulse-slow"></i>
+          </a>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+          <a href="../萌次元.html" class="text-gray-800 hover:text-primary font-medium">首页</a>
+          <a href="../category/figurines.html" class="text-gray-800 hover:text-primary font-medium">手办模型</a>
+          <a href="../category/comics.html" class="text-gray-800 hover:text-primary font-medium">同人漫画</a>
+          <a href="../category/cosplay服装.html" class="text-gray-800 hover:text-primary font-medium">Cosplay服饰</a>
+          <a href="../category/周边.html" class="text-gray-800 hover:text-primary font-medium">周边饰品</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+          <button class="text-gray-600 hover:text-primary"><i class="fa fa-search text-lg"></i></button>
+          <a href="../cart.html" class="relative text-gray-600 hover:text-primary">
+            <i class="fa fa-shopping-cart text-lg"></i>
+            <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+          </a>
+          <a href="#" class="text-gray-600 hover:text-primary font-medium hidden md:block">注册</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 登录表单 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">欢迎回来</h2>
+          <p class="text-gray-600">登录您的萌次元账号</p>
+        </div>
+        
+        <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+          <form id="loginForm" class="space-y-6">
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">电子邮箱</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fa fa-envelope text-gray-400"></i>
+                </div>
+                <input type="email" id="email" name="email" required
+                  class="pl-10 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 transition-all"
+                  placeholder="请输入您的邮箱">
+              </div>
+            </div>
+            
+            <div>
+              <label for="password" class="block text-sm font-medium text-gray-700 mb-1">密码</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fa fa-lock text-gray-400"></i>
+                </div>
+                <input type="password" id="password" name="password" required
+                  class="pl-10 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 transition-all"
+                  placeholder="请输入您的密码">
+                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                  <i class="fa fa-eye-slash"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary/20 border-gray-300 rounded">
+                <label for="remember-me" class="ml-2 block text-sm text-gray-700">记住我</label>
+              </div>
+              <div class="text-sm">
+                <a href="#" class="font-medium text-primary hover:text-primary/80">忘记密码?</a>
+              </div>
+            </div>
+            
+            <button type="submit" id="loginBtn" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center">
+              <span>登录</span>
+              <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+            
+            <div class="text-center">
+              <p class="text-gray-600">
+                还没有账号? <a href="#" class="font-medium text-primary hover:text-primary/80">立即注册</a>
+              </p>
+            </div>
+            
+            <div class="relative">
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+              </div>
+              <div class="relative flex justify-center text-sm">
+                <span class="px-2 bg-gray-50 text-gray-500">其他登录方式</span>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-4">
+              <button type="button" class="flex items-center justify-center border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition-colors">
+                <i class="fa fa-weibo text-red-500 text-xl"></i>
+              </button>
+              <button type="button" class="flex items-center justify-center border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition-colors">
+                <i class="fa fa-wechat text-green-500 text-xl"></i>
+              </button>
+              <button type="button" class="flex items-center justify-center border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition-colors">
+                <i class="fa fa-qq text-blue-500 text-xl"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">萌次元</h3>
+          <p class="text-gray-400 mb-4">专注于二次元文化衍生品，为您带来正版、高品质的动漫周边产品。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-wechat text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-instagram text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+          <ul class="space-y-2">
+            <li><a href="../萌次元.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="../category/figurines.html" class="text-gray-400 hover:text-white transition-colors">手办模型</a></li>
+            <li><a href="../category/comics.html" class="text-gray-400 hover:text-white transition-colors">同人漫画</a></li>
+            <li><a href="../category/cosplay服装.html" class="text-gray-400 hover:text-white transition-colors">Cosplay服饰</a></li>
+            <li><a href="../category/周边.html" class="text-gray-400 hover:text-white transition-colors">周边饰品</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">客户服务</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">购物指南</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">支付方式</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">配送说明</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">售后服务</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">常见问题</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center">
+              <i class="fa fa-map-marker w-6 text-gray-400"></i>
+              <span class="text-gray-400">上海市浦东新区张江高科技园区</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-phone w-6 text-gray-400"></i>
+              <span class="text-gray-400">400-888-9999</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-envelope w-6 text-gray-400"></i>
+              <span class="text-gray-400">service@moe-acg.com</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-clock-o w-6 text-gray-400"></i>
+              <span class="text-gray-400">周一至周日 9:00-21:00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm">© 2025 萌次元 版权所有</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">隐私政策</a>
+          <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">用户协议</a>
+          <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">关于我们</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      if (email && password) {
+        localStorage.setItem('user', JSON.stringify({
+          email: email,
+          avatar: 'https://picsum.photos/id/1005/200/200' 
+        }));
+        showNotification('登录成功！正在跳转...', 'success');
+        // 新增日志，确认进入跳转逻辑
+        console.log('准备跳转，当前路径：', window.location.href); 
+        setTimeout(() => {
+          // 明确写全路径测试，比如项目根路径是 http://localhost:5500/
+          window.location.href = './萌次元.html'; 
+          console.log('跳转命令已执行，新路径：', window.location.href);
+        }, 1500);
+      } else {
+        showNotification('请输入邮箱和密码', 'error');
+      }
+    });
+  
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg transform transition-all duration-500 ${
+        type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+      } translate-x-full`; 
+      notification.innerHTML = `
+        <div class="flex items-center">
+          <i class="fa ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+          <span>${message}</span>
+        </div>
+      `;
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+      }, 10);
+      setTimeout(() => {
+        notification.classList.add('opacity-0');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 500);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
